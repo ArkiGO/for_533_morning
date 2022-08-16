@@ -48,13 +48,29 @@ def get_words():
 def get_random_color():
   return "#%06x" % random.randint(0, 0xFFFFFF)
 
-
+current_date = today.strftime("%Y-%m-%d")
+week_day = today.weekday();
+if week_day == 0:
+    current_date += " 星期一"
+elif week_day == 1:
+    current_date += " 星期二"
+elif week_day == 2:
+    current_date += " 星期三"
+elif week_day == 3:
+    current_date += " 星期四"
+elif week_day == 4:
+    current_date += " 星期五"
+elif week_day == 5:
+    current_date += " 星期六"
+elif week_day == 6:
+    current_date += " 星期日"
+    
 client = WeChatClient(app_id, app_secret)
 
 wm = WeChatMessage(client)
 wea, temperature, low_temperature, high_temperature = get_weather()
 data = {
-  "date":{"value":today},
+  "date":{"value": current_date},
   "weather":{"value":wea},
   "temperature":{"value":temperature},
   "low_temperature":{"value":low_temperature},
